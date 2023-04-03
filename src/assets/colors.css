@@ -1,0 +1,15 @@
+:root {
+    --font-bold:#000000;
+    --background-main:#f2f2f2;
+    --background-section:#d1d1d1;
+    --border-color:#000000;
+    --range-input:#3a94fa;
+}
+
+.dark {
+    --font-bold:#ffffff;
+    --background-main:#f2f2f2;
+    --background-section:#000000;
+    --border-color:#ffffff;
+    --range-input:#000000;
+}
