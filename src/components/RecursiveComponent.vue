@@ -1,9 +1,8 @@
 <template>
     <div>
-        <component :is="targetComponent[items.type].component" :item="items" />
-        <div v-if="items.children && items.children.length">
-            {{ items.children }}
-        <Recursive v-for="(child , index) in items.children" :key="index" :items="child"></Recursive>
+      <component :is="targetComponent[items.type].component" :item="items" />
+        <div class="test-style" v-for="(child , index) in items.children" :key="index" >
+          <Recursive :items="child"></Recursive>
         </div>
     </div>
 </template>
@@ -38,5 +37,7 @@ data() {
 }
 </script>
 <style scoped>
-
+.test-style {
+  margin-right: 50px;
+}
 </style>

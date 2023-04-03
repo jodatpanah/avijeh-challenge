@@ -1,11 +1,9 @@
 <template>
     <div class="flex-col">
-        <!-- <template  > -->
-            <div class="flex-col-start p-16 section " v-for="(item , index) in items" :key="index">
-                <label for="input" class="f-22-bold">{{ item.label }}</label>
-                <RecursiveComponent :items="item"/>
-            </div>
-        <!-- </template> -->
+      <div class="flex-col-start p-16 section " v-for="(item , index) in items" :key="index">
+          <label for="input" class="f-22-bold">{{ item.label }}</label>
+          <RecursiveComponent  :items="item"/>
+      </div>
     </div>
     
 </template>
@@ -14,7 +12,7 @@ import RecursiveComponent from "./RecursiveComponent"
 export default {
     name:'FilterInput',
     components:{
-        RecursiveComponent
+        RecursiveComponent,
 },
     data() {
         return {
