@@ -1,9 +1,13 @@
 <template>
     <div>
-      <component :is="targetComponent[items.type].component" :item="items" />
+      <label for="input" class="f-22-bold">{{ items.label }}</label>
+      <component :is="targetComponent[items.type].component" :item="items" v-model="selectedOptions"/>
+      <template v-if="items.options ? selectedOptions.includes(items.options[0].value) : true">
         <div class="test-style" v-for="(child , index) in items.children" :key="index" >
-          <Recursive :items="child"></Recursive>
+          <Recursive :items="child" ></Recursive>
         </div>
+      </template>
+
     </div>
 </template>
 <script>
@@ -31,7 +35,8 @@ data() {
                 "number":{
                     component:'RangeInput'
                 }
-            }
+            },
+        selectedOptions:[]
     }
 }
 }

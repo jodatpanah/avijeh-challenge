@@ -20,6 +20,10 @@ input[type="checkbox"] {
     height: 15px;
     border: 1px solid var(--border-color);
 }
+input[type="checkbox"]:checked {
+    border-color: red !important;
+    background: red !important;
+}
 
 .pointer {
     cursor: pointer;
@@ -50,18 +54,30 @@ input[type="checkbox"] {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .flex-row-end {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .flex-row-start {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
+}
+.gap-8 {
+    gap: 8px;
+}
+.gap-16 {
+    gap: 16px;
+}
+.gap-32 {
+    gap: 32px;
 }
 
 /* padding */

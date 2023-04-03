@@ -1,10 +1,10 @@
-<template>
-    <div class="drop-container">
+<template >
+    <div class="drop-container" v-outside-click="closeDrop">
         <div class="selected-option flex-row-start pointer" @click="showDrop = !showDrop">
             {{ selectedValue || ' یک مورد را انتخاب کنید ' }}
         </div>
-        <div class="dropdown flex-col" v-if="showDrop">
-            <p class="pointer" v-for="(item , index) in item.options" :key="index" @click="select(item.value)">
+        <div class="dropdown flex-col" v-if="showDrop" >
+            <p class="pointer" v-for="(item , index) in item.options" :key="index" @click="select(item)" >
                 {{ item.title }}
             </p>
         </div>
@@ -21,10 +21,13 @@ export default {
         }
     },
     methods: {
-        select(value) {
-            this.selectedValue = value
+        select(e) {
+            this.selectedValue = e.title
             this.showDrop = false
-        }
+        },
+      closeDrop() {
+        this.showDrop = false
+      }
     }
 }
 </script>
