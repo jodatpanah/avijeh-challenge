@@ -80,12 +80,12 @@ export default {
             },
               {
                 "type": "checkbox",
-                "name": "name3",
+                "name": "price",
                 "label": "قیمت",
                 "children": [
                   {
                     "type": "number",
-                    "name": "name3",
+                    "name": "price-range",
                     "label": "رنج قیمت",
                     "children": [],
                     "parent": "checkbox1",
