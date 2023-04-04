@@ -1,5 +1,5 @@
 <template>
-    <div class="slider-container flex-col">
+    <div class="slider-container flex-col w-100">
       <span class="slider-back" :style="{backgroundImage: 'linear-gradient(to right, var(--range-input) '+ (value*100) + '% ,'+' transparent '+(value*100) +'%)'}"/>
       <input @change="putcash(value);" type="range" class="slider" id="one" min="0" max="1" step="0.01" v-model="value">
       <label class="rangenumber"  for="one">

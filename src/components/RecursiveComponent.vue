@@ -1,10 +1,11 @@
 <template>
-    <div>
+    <div class="flex-col gap-16 w-100">
       <label for="input" class="f-22-bold">{{ items.label }}</label>
       <component :is="targetComponent[items.type].component" :item="items" v-model="selectedOptions"/>
-      <template v-if="items.options ? selectedOptions.includes(items.options[0].value) : true">
+      <template >
         <div class="test-style" v-for="(child , index) in items.children" :key="index" >
-          <Recursive :items="child" ></Recursive>
+          <Recursive v-if="$route.query[items.name] === child.parent" :items="child" ></Recursive>
+          
         </div>
       </template>
 
@@ -38,6 +39,11 @@ data() {
             },
         selectedOptions:[]
     }
+},
+watch: {
+  'selectedOptions'() {
+    this.$emit('addFilters' , this.selectedOptions)
+  }
 }
 }
 </script>

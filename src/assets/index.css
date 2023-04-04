@@ -6,7 +6,7 @@
     appearance: none;
     outline: none;
 }
-
+/*inputs*/
 input[type="text"] {
     border: 1px solid var(--border-color);
     height: 40px;
@@ -19,10 +19,10 @@ input[type="checkbox"] {
     width: 15px;
     height: 15px;
     border: 1px solid var(--border-color);
+    border-radius: 50%;
 }
 input[type="checkbox"]:checked {
-    border-color: red !important;
-    background: red !important;
+    background: rgb(53, 52, 52) !important;
 }
 
 .pointer {
@@ -60,14 +60,14 @@ input[type="checkbox"]:checked {
 .flex-row-end {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     flex-wrap: wrap;
 }
 
 .flex-row-start {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
 }
 .gap-8 {
@@ -82,5 +82,22 @@ input[type="checkbox"]:checked {
 
 /* padding */
 .p-16 {
+    padding: 16px;
+}
+.p-8 {
+    padding: 8px;
+}
 
+/*buttons*/
+.btn {
+    border: none;
+    border-radius: 8px;
+    height: 32px;
+    width: 100px;
+}
+.red-btn {
+    background-color: red;
+}
+.w-100 {
+    width: 100%;
 }

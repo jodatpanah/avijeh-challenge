@@ -1,8 +1,19 @@
+@font-face {
+    font-family: "IRANSANS";
+    src: url("./fonts/IRANSANS.ttf");
+  }
+* {
+    font-family: "IRANSANS";
+}
 .f-22-bold {
     font-size: 22px;
     font-weight: bold;
+    color: var();
 }
 
 .f-18-med {
     font-size: 18px;
+}
+.f-light {
+    color: var(--font-light);
 }

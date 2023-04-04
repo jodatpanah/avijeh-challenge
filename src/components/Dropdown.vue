@@ -1,6 +1,6 @@
 <template >
     <div class="drop-container" v-outside-click="closeDrop">
-        <div class="selected-option flex-row-start pointer" @click="showDrop = !showDrop">
+        <div class="selected-option flex-row-start pointer p-8  " @click="showDrop = !showDrop">
             {{ selectedValue || ' یک مورد را انتخاب کنید ' }}
         </div>
         <div class="dropdown flex-col" v-if="showDrop" >
@@ -13,7 +13,7 @@
 <script>
 export default {
     name:'Dropdown',
-    props:['item'],
+    props:['item' , 'value'],
     data() {
         return {
             selectedValue:'',
@@ -23,6 +23,11 @@ export default {
     methods: {
         select(e) {
             this.selectedValue = e.title
+            console.log('df' , e , this.item.name);
+            let data = []
+            data.push(e)
+            // this.$emit('input' , data)
+            this.$router.push({query :{...this.$route.query , ...{[this.item.name] : e.value}}})
             this.showDrop = false
         },
       closeDrop() {
@@ -34,10 +39,11 @@ export default {
 <style scoped>
 .drop-container {
     position: relative;
+    max-width: 300px;
 }
 .selected-option {
     height: 40px;
-    width: 200px;
+    /* width: 200px; */
     border-radius: 4px;
     border: 1px solid var(--border-color);
 }
@@ -49,5 +55,6 @@ export default {
     border-radius: 4px;
     padding: 8px;
     border: 1px solid var(--border-color);
+    z-index: 2;
 }
 </style>
