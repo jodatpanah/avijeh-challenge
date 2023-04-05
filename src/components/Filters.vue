@@ -263,11 +263,23 @@ export default {
               ]
             },
           ],
-            filters:[]
+            filters:[],
+            // methods:{
+            //   'DELETE': (oldValue) => {
+            //     return ""
+            //   }
+            // }
         }
     },
     
     methods:{
+      // filterFunction(name , value , method , join) {
+      //   let newQuery = {...this.$route.query}
+      //   const oldValue = newQuery[name]
+      //   const result = this.methods[method](oldValue)
+      //   // console.log('test' , newQuery[name]);
+      // },
+
       removeAll() {
         this.$router.replace(delete 'query');
       },
