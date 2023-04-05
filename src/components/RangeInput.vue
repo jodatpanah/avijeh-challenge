@@ -1,34 +1,40 @@
 <template>
     <div class="slider-container flex-col w-100">
-      <span class="slider-back" :style="{backgroundImage: 'linear-gradient(to right, var(--range-input) '+ (value*100) + '% ,'+' transparent '+(value*100) +'%)'}"/>
-      <input @change="putcash(value);" type="range" class="slider" id="one" min="0" max="1" step="0.01" v-model="value">
-      <label class="rangenumber"  for="one">
-        <a class="reg_12 f_gray">{{(value*100).toFixed(0)}}%</a>
+      <span class="slider-back" :style="{backgroundImage: 'linear-gradient(to right, rgb(238, 129, 27) '+ ((calckText[item.name] / item.max || 0)) + '% ,'+' transparent '+((calckText[item.name] / item.max || 0)) +'%)'}"/>
+      <input @input="putcash()" type="range" class="slider" v-model="value">
+      <label class="rangenumber flex-row-between"  for="one">
+        <a class="reg_12 f_gray">{{calckText[item.name]}}</a>
+        <a class="reg_12 f_gray">0 </a>
       </label>
     </div>
   </template>
   <script>
+  import { calckText } from "@/library/functions"
   export default {
     name: "TheSlider",
-    props: ['id', 'percent'],
-    emits: ['change'],
+    props: ['item'],
     data() {
       return {
-        decimal: 8,
-        value: this.percent || 0
+        value: 0
       }
     },
-    watch: {
-      percent(val) {
-        this.value = val
-      }
+    computed: {
+      calckText
     },
-    mounted() {
+    watch:{
+      'calckText'() {
+        this.value = this.calckText[this.item.name] / this.item.max || 0
+      }
     },
     methods: {
       putcash() {
-        this.$emit('change', this.value)
+        let newQuery = {...this.$route.query}
+        newQuery[this.item.name] = this.value * this.item.max
+        this.$router.push({query: newQuery})
       },
+    },
+    mounted() {
+      this.value = this.calckText[this.item.name] / this.item.max || 0
     }
   }
   </script>
@@ -44,7 +50,7 @@
   .slider-back {
     height: 8px;
     width: 99%;
-    background-color: #696969;
+    background-color: var(--border-color);
     border-radius: 5px;
     display: inline-block;
     position: absolute;
@@ -59,7 +65,7 @@
     appearance: none;
     width: 100%;
     height: 0;
-    background: #EDEFF2 !important;
+    background: rgb(238, 129, 27) !important;
     outline: none;
     border: none !important;
     -webkit-transition: .2s;
@@ -73,22 +79,22 @@
   .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 10px;
-    height: 10px;
-    background: var(--range-input);
+    width: 15px;
+    height: 15px;
+    background: rgb(238, 129, 27);
     cursor: pointer;
     z-index: 2;
-    border: 3px solid #DBDCDE;
+    border: 3px solid rgb(248, 183, 123);
     border-radius: 2px !important;
     transform: rotate(45deg);
   }
   .slider::-moz-range-thumb {
-    width: 10px;
-    height: 10px;
-    background: var(--range-input);
+    width: 15px;
+    height: 15px;
+    background: rgb(238, 129, 27);
     cursor: pointer;
     z-index: 2;
-    border: 3px solid #DBDCDE;
+    border: 3px solid rgb(248, 183, 123);
     border-radius: 2px !important;
     transform: rotate(45deg);
   }

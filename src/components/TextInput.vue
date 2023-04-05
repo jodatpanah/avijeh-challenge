@@ -19,7 +19,6 @@ export default {
     methods: {
         searchtext(name , value) {
           let newQuery = {...this.$route.query}
-            // this.$router.push({query :{...this.$route.query , [name] : value}})
           newQuery[name] = value
           this.$router.push({query: newQuery})
           if(!this.$route.query[name]) {

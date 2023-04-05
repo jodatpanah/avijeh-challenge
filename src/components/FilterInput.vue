@@ -12,13 +12,7 @@
           </button>
           <div class="filters flex-row-start gap-16">
             <div class="filter p-8 pointer" v-for="(filter , index) in $route.query" :key="index" @click="removeIndex(index)">
-<!--              {{index}}-->
-               <p class="f-light">{{ sourceObject.find(a => a.name === index)?.label }} : {{ filter }}
-<!--                <span v-for="(item , index2) in filter" :key="index2">-->
-<!--                  <span v-if="filter.length >= 2"> , </span>-->
-<!--                  {{ item }} -->
-<!--                </span>-->
-              </p> 
+               <p class="f-light">{{ sourceObject.find(a => a.name === index)?.label }} : {{ filter }}</p> 
             </div>
           </div>
       </div>
@@ -31,7 +25,7 @@ export default {
     name:'FilterInput',
     components:{
         RecursiveComponent,
-},
+    },
     data() {
         return {
             items:[
@@ -88,6 +82,8 @@ export default {
                     "type": "number",
                     "name": "price-range",
                     "label": "رنج قیمت",
+                    "min":0,
+                    "max":5000,
                     "children": [],
                     "parent": "filter-price",
                     "options": [
@@ -107,7 +103,7 @@ export default {
                 "label": "دسته  بندی",
                 "children": [
                 {
-                    "type": "checkbox",
+                    "type": "multi-checkbox",
                     "name": "sellers2-option",
                     "label": " انواع فروشنده رسمی",
                     "children": [],
@@ -149,6 +145,8 @@ export default {
               "label": "نام کالا",
               "children": [],
               "parent": "",
+              "id":"1",
+              "parentId":""
             },
             {
               "type": "multi-checkbox",
@@ -156,6 +154,8 @@ export default {
               "label": "انواع فروشنده",
               "children": [],
               "parent": "name3",
+              "id":"2",
+              "parentId":"3",
               "options": [
                 { value: 'checkbox1', title: 'فروشنده رسمی' },
                 { value: 'checkbox2', title: 'فروشنده برگزیده' },
@@ -167,9 +167,10 @@ export default {
               "type": "checkbox",
               "name": "name3",
               "label": " کالاهای موجود",
-              "children": [
-              ],
+              "children": [],
               "parent": "",
+              "id":"3",
+              "parentId":"",
               "options": [
                 { value: 'checkbox1', title: 'فقط کالاهای موجود' },
               ],
@@ -180,6 +181,8 @@ export default {
               "label": "انواع فروشنده",
               "children": [],
               "parent": "checkbox1",
+              "id":"4",
+              "parentId":"",
               "options": [
                 { value: 'checkbox1', title: 'فروشنده رسمی' },
                 { value: 'checkbox2', title: 'فروشنده برگزیده' },
@@ -194,6 +197,8 @@ export default {
               "children": [
               ],
               "parent": "",
+              "id":"5",
+              "parentId":"",
               "options": [
                 { value: 'filter-price', title: 'فیلتر بر اساس قیمت' },
               ],
@@ -202,8 +207,12 @@ export default {
               "type": "number",
               "name": "price-range",
               "label": "رنج قیمت",
+              "min":0,
+              "max":5000,
               "children": [],
               "parent": "filter-price",
+              "id":"6",
+              "parentId":"5",
               "options": [
                 { value: 'price-range', title: 'checkbox1' },
               ],
@@ -215,6 +224,8 @@ export default {
               "children": [
               ],
               "parent": "",
+              "id":"7",
+              "parentId":"",
               "options": [
                 { value: 'checkbox1', title: 'فروشنده رسمی' },
                 { value: 'checkbox2', title: 'فروشنده برگزیده' },
@@ -228,6 +239,8 @@ export default {
               "label": " انواع فروشنده رسمی",
               "children": [],
               "parent": "checkbox1",
+              "id":"8",
+              "parentId":"7",
               "options": [
                 { value: 'checkbox1', title: '1فروشنده رسمی' },
                 { value: 'checkbox2', title: '2فروشنده رسمی' },
@@ -241,6 +254,8 @@ export default {
               "label": "انواع فروشنده برگزیده",
               "children": [],
               "parent": "checkbox2",
+              "id":"9",
+              "parentId":"7",
               "options": [
                 { value: 'checkbox1', title: '1فروشنده برگزیده' },
                 { value: 'checkbox2', title: '2فروشنده برگزیده' },
@@ -249,18 +264,10 @@ export default {
               ]
             },
           ],
-            filters:[
-              // {
-              //   value:'',
-              //   title:''
-              // }
-            ]
-
+            filters:[]
         }
     },
-    mounted() {
-
-    },
+    
     methods:{
       addFilters(e) {
         this.filters.push(e[0])
@@ -269,23 +276,51 @@ export default {
         this.$router.replace(delete 'query');
       },
       removeIndex(e) {
-        // alert(e)
         let newQuery = {...this.$route.query}
         delete newQuery[e]
-        const children = this.items.find(a => a.name === e).children
-        if(children.length) {
+        const children = this.items.find(a => a.name === e)?.children
+        if(children?.length) {
           for(let i = 0 ; i <children.length ; i++) {
             delete newQuery[children[i].name]
           }
         }
         this.$router.push({query: newQuery})
-        // delete this.$route.query[e]
-        // console.log('alert',this.$route.query[e]);
-        // delete this.$route.query[e]
-        // this.$router.replace({'query': {...this.$route.query , delete }})
-        // this.$router.replace({[e] : null})
-      }
-    }
+      },
+
+      processAllObjects(data) {
+        data.forEach(child => {
+          if (child.parentId !== "") {
+            const parent = data.find(obj => obj.id === child.parentId);
+            console.log('hvfg' , parent)
+            if (!parent) {
+              console.error(`Parent with id ${child.parentId} not found.`);
+              return;
+            }
+
+            if (!parent.children) {
+              parent.children = [];
+            }
+
+            parent.children.push(child);
+            
+          }
+        });
+        for(let i =0 ; i < data.length ; i++) {
+          if (data[i].parentId !== "") {
+            delete data[i]
+          }
+          // else {
+          //   this.items.push(data[i])
+          // }
+        }
+        // this.items = data
+        console.log('sdkj' , this.items);
+      },
+    },
+
+    mounted() {
+      // this.processAllObjects(this.sourceObject)
+    },
 }
 </script>
 <style scoped>

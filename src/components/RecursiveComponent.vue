@@ -43,11 +43,6 @@ data() {
         selectedOptions:[]
     }
 },
-watch: {
-  'selectedOptions'() {
-    this.$emit('addFilters' , this.selectedOptions)
-  }
-}
 }
 </script>
 <style scoped>

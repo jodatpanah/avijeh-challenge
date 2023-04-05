@@ -13,7 +13,7 @@
 <script>
 export default {
     name:'Dropdown',
-    props:['item' , 'value'],
+    props:['item'],
     data() {
         return {
             selectedValue:'',
@@ -23,10 +23,8 @@ export default {
     methods: {
         select(e) {
             this.selectedValue = e.title
-            console.log('df' , e , this.item.name);
             let data = []
             data.push(e)
-            // this.$emit('input' , data)
             this.$router.push({query :{...this.$route.query , ...{[this.item.name] : e.value}}})
             this.showDrop = false
         },
