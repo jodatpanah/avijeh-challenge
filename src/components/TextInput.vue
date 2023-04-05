@@ -1,10 +1,10 @@
 <template>
     <div class="w-100">
-        <input @input="searchtext($event.target.value)" :value="calckText[item.name]" :placeholder="item.title" name="input" class="f-18-med" type="text">
+      <input @input="searchtext(item.name , $event.target.value)" :value="calckText[item.name]" :placeholder="item.title" name="input" class="f-18-med" type="text">
     </div>
 </template>
 <script>
-import { calckText } from "../library/functions"
+import { calckText } from "@/library/functions"
 export default {
     name:'TextInput',
     props:['item'],
@@ -17,8 +17,16 @@ export default {
         calckText
     },
     methods: {
-        searchtext(e) {
-            this.$router.push({query :{...this.$route.query , [this.item.name] : e}})
+        searchtext(name , value) {
+          let newQuery = {...this.$route.query}
+            // this.$router.push({query :{...this.$route.query , [name] : value}})
+          newQuery[name] = value
+          this.$router.push({query: newQuery})
+          if(!this.$route.query[name]) {
+            delete newQuery[name]
+            this.$router.push({query: newQuery})
+          }
+
         },
     },
 }

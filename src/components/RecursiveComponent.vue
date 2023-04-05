@@ -2,10 +2,9 @@
     <div class="flex-col gap-16 w-100">
       <label for="input" class="f-22-bold">{{ items.label }}</label>
       <component :is="targetComponent[items.type].component" :item="items" v-model="selectedOptions"/>
-      <template >
+      <template>
         <div class="test-style" v-for="(child , index) in items.children" :key="index" >
-          <Recursive v-if="$route.query[items.name] === child.parent" :items="child" ></Recursive>
-          
+          <Recursive v-if="$route.query[items.name]?.includes(child.parent)" :items="child" ></Recursive>
         </div>
       </template>
 
@@ -18,7 +17,8 @@ export default {
     TextInput: () => import("./TextInput.vue"),
     Dropdown: () => import("./Dropdown.vue"),
     CheckBox: () => import("./CheckBox.vue"),
-    RangeInput: () => import("./RangeInput.vue")
+    RangeInput: () => import("./RangeInput.vue"),
+      MultiCheckbox: () => import("./MultiCheckbox")
 },
 props:['items'],
 data() {
@@ -35,6 +35,9 @@ data() {
                 },
                 "number":{
                     component:'RangeInput'
+                },
+                "multi-checkbox":{
+                        component:'MultiCheckbox'
                 }
             },
         selectedOptions:[]
