@@ -1,7 +1,7 @@
 <template>
     <div class="flex-col w-100">
         <div class="flex-col-start p-16 section w-100" v-for="(item , index) in items" :key="index">
-            <RecursiveComponent  :items="item"/>
+            <RecursiveComponent :items="item"/>
         </div>
       <div class="section flex-col gap-16">
           <p class="f-22-bold">
@@ -17,7 +17,6 @@
           </div>
       </div>
     </div>
-    
 </template>
 <script>
 import RecursiveComponent from "./RecursiveComponent"

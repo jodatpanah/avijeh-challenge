@@ -4,6 +4,7 @@
   </div>
 </template>
 <script>
+// import {customReplace} from './library/customeQuery'
 import Filters from './components/Filters.vue';
 export default {
   name: 'App',
@@ -12,8 +13,20 @@ export default {
 },
   data() {
     return {
-    
+      customeQuery:''
     }
+  },
+  // watch:{
+  //   '$route'() {
+  //     this.queryEncode()
+  //   }
+  // },
+  methods:{
+    // queryEncode() {
+    //   this.customeQuery = customReplace('this.$router.query.toString()')
+    //   console.log('tetetetete' , this.$route);
+    //   this.$router.push({fullPath : this.$route.path + 'p'})
+    // }
   }
 }
 </script>

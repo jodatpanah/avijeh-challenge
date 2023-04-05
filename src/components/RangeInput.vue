@@ -1,6 +1,6 @@
 <template>
     <div class="slider-container flex-col w-100">
-      <span class="slider-back" :style="{backgroundImage: 'linear-gradient(to right, rgb(238, 129, 27) '+ ((calckText[item.name] / item.max || 0)) + '% ,'+' transparent '+((calckText[item.name] / item.max || 0)) +'%)'}"/>
+      <span class="slider-back" :style="{backgroundImage: 'linear-gradient(to right, var(--active-input) '+ ((calckText[item.name] / item.max || 0)) + '% ,'+' transparent '+((calckText[item.name] / item.max || 0)) +'%)'}"/>
       <input @input="putcash()" type="range" class="slider" v-model="value">
       <label class="rangenumber flex-row-between">
         <a class="f-18-med">{{calckText[item.name]}}</a>
@@ -12,7 +12,19 @@
   import { calckText } from "@/library/functions"
   export default {
     name: "TheSlider",
-    props: ['item'],
+    props: {
+      item:{
+        type:[],
+        required: true,
+        default:{
+          "type": "",
+          "name": "",
+          "label": "",
+          "children": [],
+          "parent": "",
+        }
+      }
+    },
     data() {
       return {
         value: 0
@@ -65,7 +77,7 @@
     appearance: none;
     width: 100%;
     height: 0;
-    background: rgb(238, 129, 27) !important;
+    background: var(--active-input) !important;
     outline: none;
     border: none !important;
     -webkit-transition: .2s;
@@ -81,20 +93,20 @@
     appearance: none;
     width: 15px;
     height: 15px;
-    background: rgb(238, 129, 27);
+    background: var(--active-input);
     cursor: pointer;
     z-index: 2;
-    border: 3px solid rgb(248, 183, 123);
+    border: 3px solid var(--thumb-border);
     border-radius: 2px !important;
     transform: rotate(45deg);
   }
   .slider::-moz-range-thumb {
     width: 15px;
     height: 15px;
-    background: rgb(238, 129, 27);
+    background: var(--active-input);
     cursor: pointer;
     z-index: 2;
-    border: 3px solid rgb(248, 183, 123);
+    border: 3px solid var(--thumb-border);
     border-radius: 2px !important;
     transform: rotate(45deg);
   }

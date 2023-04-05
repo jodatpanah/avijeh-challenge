@@ -5,6 +5,8 @@
     --background-section:#ffffff;
     --border-color:#d3ab1987;
     --range-input:#3a94fa;
+    --active-input: rgb(238, 129, 27);
+    --thumb-border: rgb(248, 183, 123);
 }
 
 .dark {
@@ -14,4 +16,6 @@
     --background-section:#000000;
     --border-color:#ffffff;
     --range-input:#000000;
+    --active-input: rgb(238, 129, 27);
+    --thumb-border: rgb(248, 183, 123);
 }

@@ -13,7 +13,19 @@
 <script>
 export default {
     name:'Dropdown',
-    props:['item'],
+    props:{
+        item:{
+        type:[],
+        required: true,
+        default:{
+          "type": "",
+          "name": "",
+          "label": "",
+          "children": [],
+          "parent": "",
+        }
+      }
+    },
     data() {
         return {
             selectedValue:'',

@@ -7,7 +7,19 @@
 import { calckText } from "@/library/functions"
 export default {
     name:'TextInput',
-    props:['item'],
+    props:{
+      item:{
+        type:[],
+        required: true,
+        default:{
+          "type": "",
+          "name": "",
+          "label": "",
+          "children": [],
+          "parent": "",
+        }
+      }
+    },
     data() {
         return {
             
@@ -29,6 +41,3 @@ export default {
     },
 }
 </script>
-<style scoped>
-
-</style>
