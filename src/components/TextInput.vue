@@ -25,7 +25,6 @@ export default {
             delete newQuery[name]
             this.$router.push({query: newQuery})
           }
-
         },
     },
 }

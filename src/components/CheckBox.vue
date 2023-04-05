@@ -1,5 +1,5 @@
 <template>
-    <div class=" flex-row-start gap-16 w-100">
+    <div class="flex-row-start gap-16 w-100">
         <label class="flex-row-start gap-8 pointer" v-for="(option , index) in item.options" :key="index">
           <div class="checkbox-container pointer" :class="{'checkbox-container-active' : calckText[item.name]}" @change="toggleCheckbox(item.name , option.value)">
             <input class="f-18-med pointer" type="checkbox" :value="option.value" :name="option.title" :checked="calckText[item.name]" />
@@ -40,6 +40,3 @@ export default {
     },
 }
 </script>
-<style scoped>
-
-</style>

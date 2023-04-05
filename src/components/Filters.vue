@@ -22,7 +22,7 @@
 <script>
 import RecursiveComponent from "./RecursiveComponent"
 export default {
-    name:'FilterInput',
+    name:'Filters',
     components:{
         RecursiveComponent,
     },
@@ -272,9 +272,11 @@ export default {
       addFilters(e) {
         this.filters.push(e[0])
       },
+
       removeAll() {
         this.$router.replace(delete 'query');
       },
+
       removeIndex(e) {
         let newQuery = {...this.$route.query}
         delete newQuery[e]
@@ -287,22 +289,18 @@ export default {
         this.$router.push({query: newQuery})
       },
 
-      processAllObjects(data) {
+      processSourceObject(data) {
         data.forEach(child => {
           if (child.parentId !== "") {
             const parent = data.find(obj => obj.id === child.parentId);
-            console.log('hvfg' , parent)
             if (!parent) {
               console.error(`Parent with id ${child.parentId} not found.`);
               return;
             }
-
             if (!parent.children) {
               parent.children = [];
             }
-
             parent.children.push(child);
-            
           }
         });
         for(let i =0 ; i < data.length ; i++) {
@@ -319,7 +317,7 @@ export default {
     },
 
     mounted() {
-      // this.processAllObjects(this.sourceObject)
+      // this.processSourceObject(this.sourceObject)
     },
 }
 </script>

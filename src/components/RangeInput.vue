@@ -2,9 +2,9 @@
     <div class="slider-container flex-col w-100">
       <span class="slider-back" :style="{backgroundImage: 'linear-gradient(to right, rgb(238, 129, 27) '+ ((calckText[item.name] / item.max || 0)) + '% ,'+' transparent '+((calckText[item.name] / item.max || 0)) +'%)'}"/>
       <input @input="putcash()" type="range" class="slider" v-model="value">
-      <label class="rangenumber flex-row-between"  for="one">
-        <a class="reg_12 f_gray">{{calckText[item.name]}}</a>
-        <a class="reg_12 f_gray">0 </a>
+      <label class="rangenumber flex-row-between">
+        <a class="f-18-med">{{calckText[item.name]}}</a>
+        <a class="f-18-med">0 </a>
       </label>
     </div>
   </template>

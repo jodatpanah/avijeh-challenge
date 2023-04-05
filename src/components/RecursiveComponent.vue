@@ -1,9 +1,9 @@
 <template>
     <div class="flex-col gap-16 w-100">
       <label for="input" class="f-22-bold">{{ items.label }}</label>
-      <component :is="targetComponent[items.type].component" :item="items" v-model="selectedOptions"/>
+      <component :is="targetComponent[items.type].component" :item="items"/>
       <template>
-        <div class="test-style" v-for="(child , index) in items.children" :key="index" >
+        <div class="child-style" v-for="(child , index) in items.children" :key="index" >
           <Recursive v-if="$route.query[items.name]?.includes(child.parent)" :items="child" ></Recursive>
         </div>
       </template>
@@ -40,13 +40,12 @@ data() {
                         component:'MultiCheckbox'
                 }
             },
-        selectedOptions:[]
     }
 },
 }
 </script>
 <style scoped>
-.test-style {
+.child-style {
   margin-right: 50px;
 }
 </style>

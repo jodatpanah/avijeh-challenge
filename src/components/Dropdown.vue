@@ -1,6 +1,6 @@
 <template >
     <div class="drop-container" v-outside-click="closeDrop">
-        <div class="selected-option flex-row-start pointer p-8  " @click="showDrop = !showDrop">
+        <div class="selected-option flex-row-start pointer p-8" @click="showDrop = !showDrop">
             {{ selectedValue || ' یک مورد را انتخاب کنید ' }}
         </div>
         <div class="dropdown flex-col" v-if="showDrop" >
