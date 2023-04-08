@@ -1,15 +1,15 @@
 <template>
     <div class="slider-container flex-col w-100">
-      <span class="slider-back" :style="{backgroundImage: 'linear-gradient(to right, var(--active-input) '+ ((calckText[item.name] / item.max || 0)) + '% ,'+' transparent '+((calckText[item.name] / item.max || 0)) +'%)'}"/>
+      <span class="slider-back" :style="{backgroundImage: 'linear-gradient(to right, var(--active-input) '+ ((calcText[item.name] / item.max || 0)) + '% ,'+' transparent '+((calckText[item.name] / item.max || 0)) +'%)'}"/>
       <input @change="$addFilter(item , value * item.max , '' , '' , '' , $route.query)" type="range" class="slider" v-model="value">
       <label class="rangenumber flex-row-between">
-        <a class="f-18-med">{{calckText[item.name]}}</a>
+        <a class="f-18-med">{{calcText[item.name]}}</a>
         <a class="f-18-med">0 </a>
       </label>
     </div>
   </template>
   <script>
-  import { calckText } from "@/library/functions"
+  import { calcText } from "@/library/reuseableFunctions"
   export default {
     name: "TheSlider",
     props: {
@@ -31,15 +31,15 @@
       }
     },
     computed: {
-      calckText
+      calcText
     },
     watch:{
-      'calckText'() {
-        this.value = this.calckText[this.item.name] / this.item.max || 0
+      'calcText'() {
+        this.value = this.calcText[this.item.name] / this.item.max || 0
       }
     },
     mounted() {
-      this.value = this.calckText[this.item.name] / this.item.max || 0
+      this.value = this.calcText[this.item.name] / this.item.max || 0
     }
   }
   </script>

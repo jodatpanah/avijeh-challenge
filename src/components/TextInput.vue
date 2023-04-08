@@ -4,7 +4,7 @@
     </div>
 </template>
 <script>
-import { calckText } from "@/library/functions"
+import { calcText } from "@/library/reuseableFunctions"
 export default {
     name:'TextInput',
     props:{
@@ -26,10 +26,10 @@ export default {
         }
     },
     computed:{
-        calckText,
+        calcText,
     },
     mounted() {
-      this.value = this.calckText[this.item.name] || ''
+      this.value = this.calcText[this.item.name] || ''
     }
 }
 </script>

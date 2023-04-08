@@ -1,3 +1,3 @@
-export function calckText() {
+export function calcText() {
     return this.$route.query
 }
