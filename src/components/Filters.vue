@@ -264,22 +264,10 @@ export default {
             },
           ],
             filters:[],
-            // methods:{
-            //   'DELETE': (oldValue) => {
-            //     return ""
-            //   }
-            // }
         }
     },
     
     methods:{
-      // filterFunction(name , value , method , join) {
-      //   let newQuery = {...this.$route.query}
-      //   const oldValue = newQuery[name]
-      //   const result = this.methods[method](oldValue)
-      //   // console.log('test' , newQuery[name]);
-      // },
-
       removeAll() {
         this.$router.replace(delete 'query');
       },
@@ -289,9 +277,8 @@ export default {
         delete newQuery[e]
         const children = this.items.find(a => a.name === e)?.children
         if(children?.length) {
-          for(let i = 0 ; i <children.length ; i++) {
-            delete newQuery[children[i].name]
-          }
+          const child = children.find(a => newQuery[a.name])?.name
+          delete newQuery[child]
         }
         this.$router.push({query: newQuery})
       },
