@@ -1,7 +1,7 @@
 <template>
     <div class="slider-container flex-col w-100">
       <span class="slider-back" :style="{backgroundImage: 'linear-gradient(to right, var(--active-input) '+ ((calckText[item.name] / item.max || 0)) + '% ,'+' transparent '+((calckText[item.name] / item.max || 0)) +'%)'}"/>
-      <input @input="putcash()" type="range" class="slider" v-model="value">
+      <input @change="$addFilter(item , value * item.max , '' , '' , '' , $route.query)" type="range" class="slider" v-model="value">
       <label class="rangenumber flex-row-between">
         <a class="f-18-med">{{calckText[item.name]}}</a>
         <a class="f-18-med">0 </a>
@@ -37,13 +37,6 @@
       'calckText'() {
         this.value = this.calckText[this.item.name] / this.item.max || 0
       }
-    },
-    methods: {
-      putcash() {
-        let newQuery = {...this.$route.query}
-        newQuery[this.item.name] = this.value * this.item.max
-        this.$router.push({query: newQuery})
-      },
     },
     mounted() {
       this.value = this.calckText[this.item.name] / this.item.max || 0

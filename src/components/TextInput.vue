@@ -1,6 +1,6 @@
 <template>
     <div class="w-100">
-      <input @input="searchtext(item.name , $event.target.value , '')" :value="calckText[item.name]" :placeholder="item.title" name="input" class="f-18-med" type="text">
+      <input @input="$addFilter(item , value , '' ,'' , '' ,$route.query)" v-model="value" :placeholder="item.title" name="input" class="f-18-med" type="text">
     </div>
 </template>
 <script>
@@ -22,53 +22,14 @@ export default {
     },
     data() {
         return {
-          values:[]
+          value:''
         }
     },
     computed:{
         calckText,
     },
-    methods: {
-        // searchtext(name , value) {
-        //   let newQuery = {...this.$route.query}
-        //   newQuery[name] = value
-        //   this.$router.push({query: newQuery})
-        //   if(!this.$route.query[name]) {
-        //     delete newQuery[name]
-        //     this.$router.push({query: newQuery})
-        //   }
-        // },
-
-
-    //     searchtext(name , value) {
-    //   let newQuery = {...this.$route.query}
-    //   // this.values.push(value)
-    //   // newQuery[name] = this.values.join(",")
-    //   newQuery[name] = value
-    //   this.$router.push({query: newQuery})
-    //   if(!this.$route.query[name]) {
-    //     delete newQuery[name]
-    //     this.$router.push({query: newQuery})
-    //   }
-    // }
-
-    searchtext(name , value , active , join) {
-        let newQuery = {...this.$route.query}
-        console.log('test' , newQuery[name] , value);
-        if(active === 'DELETE') {
-        delete newQuery[name]
-        this.values.splice(this.values.indexOf(value) , 1)
-        newQuery[name] = this.values.join(join)
-      } 
-      if(!value) {
-        delete newQuery[name]
-      }
-      else {
-        this.values.push(value)
-        newQuery[name] = value
-      }
-      this.$router.push({query: newQuery})
+    mounted() {
+      this.value = this.calckText[this.item.name] || ''
     }
-    },
 }
 </script>

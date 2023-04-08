@@ -5,7 +5,8 @@ Vue.config.productionTip = false
 import "./assets/colors.css"
 import "./assets/index.css"
 import "./assets/fonts.css"
-import "./library/OursideClick"
+import "./library/outSideClick"
+import "./library/globalFunctions"
 
 import router from "./library/router"
 new Vue({

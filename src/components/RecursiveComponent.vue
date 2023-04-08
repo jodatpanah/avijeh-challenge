@@ -1,9 +1,9 @@
 <template>
   <div class="flex-col gap-16 w-100">
     <label for="input" class="f-22-bold">{{ items.label }}</label>
-    <component :is="targetComponent[items.type].component" :item="items" />
+    <component :is="targetComponent[items.type].component" :item="items"/>
     <template>
-      <div class="child-style" v-for="(child, index) in items.children" :key="index">
+      <div class="child-style" v-for="(child, index) in items.children" :key="index + child.name">
         <Recursive v-if="$route.query[items.name]?.includes(child.parent)" :items="child"></Recursive>
       </div>
     </template>
@@ -18,7 +18,6 @@ export default {
     Dropdown: () => import("./Dropdown.vue"),
     CheckBox: () => import("./CheckBox.vue"),
     RangeInput: () => import("./RangeInput.vue"),
-    // MultiCheckbox: () => import("./MultiCheckbox")
   },
   props: {
     items:{
@@ -54,6 +53,8 @@ export default {
       },
     }
   },
+  methods:{
+  }
 }
 </script>
 <style scoped>

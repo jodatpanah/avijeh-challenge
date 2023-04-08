@@ -1,7 +1,9 @@
 <template>
     <div class="flex-row-start gap-16 w-100">
-        <label class="flex-row-start gap-8 pointer" v-for="(option , index) in item.options" :key="index">
-          <div class="checkbox-container pointer" :class="{'checkbox-container-active' : calckText[item.name]?.includes(option.value)}" @change="toggleCheckbox(item.name , option.value , calckText[item.name]?.includes(option.value) ? 'DELETE' : '' , ',')">
+        <label class="flex-row-start gap-8 pointer" v-for="(option , index) in item.options" :key="index + option.title">
+          <div class="checkbox-container pointer" :class="{'checkbox-container-active'
+              : calckText[item.name]?.includes(option.value)}"
+               @change="$addFilter(item , option.value , values, calckText[item.name]?.includes(option.value) ? 'DELETE' : 'PUSH' , ',' , $route.query)">
             <input class="f-18-med pointer" type="checkbox" :value="option.value" :name="option.title" :checked="calckText[item.name]?.includes(option.value)" />
           </div>
           {{option.title}}
@@ -34,19 +36,7 @@ export default {
     calckText
   },
     methods: {
-      toggleCheckbox(name , value , active , join) {
-        let newQuery = {...this.$route.query}
-        if(active === 'DELETE') {
-        delete newQuery[name]
-        this.values.splice(this.values.indexOf(value) , 1)
-        newQuery[name] = this.values.join(join)
-      } 
-      else {
-        this.values.push(value)
-        newQuery[name] = this.values.join(join)
-      }
-      this.$router.push({query: newQuery})
-    }
+
     },
 }
 </script>

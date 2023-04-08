@@ -4,8 +4,9 @@
             {{ selectedValue || ' یک مورد را انتخاب کنید ' }}
         </div>
         <div class="dropdown flex-col" v-if="showDrop" >
-            <p class="pointer" v-for="(item , index) in item.options" :key="index" @click="select(item)" >
-                {{ item.title }}
+            <p class="pointer" v-for="(option , index) in item.options" :key="index + option.title"
+               @click="$addFilter(item , option.value , '' , '' , '' , $route.query);selectedValue = option.title;closeDrop()" >
+                {{ option.title }}
             </p>
         </div>
     </div>
@@ -33,13 +34,6 @@ export default {
         }
     },
     methods: {
-        select(e) {
-            this.selectedValue = e.title
-            let data = []
-            data.push(e)
-            this.$router.push({query :{...this.$route.query , ...{[this.item.name] : e.value}}})
-            this.showDrop = false
-        },
       closeDrop() {
         this.showDrop = false
       }

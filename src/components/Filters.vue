@@ -1,6 +1,6 @@
 <template>
     <div class="flex-col w-100">
-        <div class="flex-col-start p-16 section w-100" v-for="(item , index) in items" :key="index">
+        <div class="flex-col-start p-16 section w-100" v-for="(item , index) in items" :key="index + item.name">
             <RecursiveComponent :items="item"/>
         </div>
       <div class="section flex-col gap-16">
